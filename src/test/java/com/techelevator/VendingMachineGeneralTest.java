@@ -38,7 +38,6 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     public void v_exit() {
     }
 
-
     @Override
     public void v_generate_sales_report() {
         int currentCount = -1;
@@ -59,7 +58,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void e_return_to_menu_principal() {
+    public void e_gsr_return_to_menu_principal() {
+
+    }
+
+    @Override
+    public void e_sai_return_to_menu_principal() {
 
     }
 
@@ -167,14 +171,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
-//        e_return_to_menu_principal();
-//        v_menu_principal();
-//        v_menu_principal();
-//        v_menu_principal();
-//        e_menu_principal_opcao_3();
-//        v_exit();
-//        e_restart_machine();
+        // e_return_to_menu_principal();
+        // v_menu_principal();
+        // v_menu_principal();
+        // v_menu_principal();
+        // e_menu_principal_opcao_3();
+        // v_exit();
+        // e_restart_machine();
     }
 }
-
-

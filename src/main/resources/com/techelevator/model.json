@@ -134,11 +134,130 @@
           "edges": [
             {
               "data": {
-                "id": "b921609e-419a-461e-b0fa-c905de938d6c",
-                "name": "e_produto_liberado",
-                "source": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
+                "id": "a9c9d0ce-bbbc-403e-9655-9372d2942529",
+                "name": "e_entrega_troco",
+                "source": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
+                "target": "84bd6e63-68c5-4457-8c01-5a727a981650",
+                "color": "LightSteelBlue",
+                "actions": ["global.totalBalance = 0;"]
+              },
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
+              "removed": false,
+              "selected": true,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "b9d60e70-ed66-438a-b642-b29052c0e150",
+                "name": "e_menu_compra_opcao_3",
+                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "target": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
+                "color": "LightSteelBlue",
+                "guard": "global.purchaseMenu==3"
+              },
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "c7ce6ae4-b3e2-4501-9d28-3c5eb768f2ef",
+                "name": "e_add_new_value_success",
+                "source": "691c1684-99a3-40a3-9a72-06f5dc25926d",
                 "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "color": "LightSteelBlue"
+                "color": "LightSteelBlue",
+                "guard": "global.validMoneys.includes(global.newValue)",
+                "actions": ["global.totalBalance += global.newValue;"]
+              },
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "f6c7e871-7d6c-479c-9e8a-26f0ca4e5744",
+                "name": "e_menu_compra_opcao_1",
+                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "target": "691c1684-99a3-40a3-9a72-06f5dc25926d",
+                "color": "LightSteelBlue",
+                "guard": "global.purchaseMenu==1",
+                "actions": [
+                  "global.newValue = global.moneys[Math.floor(Math.random() * global.moneys.length)];"
+                ]
+              },
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "67a59327-d196-4142-9796-08820dbe80e1",
+                "name": "e_add_new_value_error",
+                "source": "691c1684-99a3-40a3-9a72-06f5dc25926d",
+                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "color": "LightSteelBlue",
+                "guard": "!global.validMoneys.includes(global.newValue)"
+              },
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "5920b3b4-b16d-4248-8a56-c604605de66b",
+                "name": "e_menu_compra_opcao_2",
+                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "target": "61f6c604-a812-4cc8-b12a-d93403679f99",
+                "color": "LightSteelBlue",
+                "guard": "global.purchaseMenu==2"
+              },
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "6ec0965c-31bd-46c1-8ff1-7096328e2683",
+                "name": "e_selected_product_error",
+                "source": "61f6c604-a812-4cc8-b12a-d93403679f99",
+                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "color": "LightSteelBlue",
+                "guard": "!global.validProducts.includes(global.selectedProduct.code) || global.selectedProduct.price > global.totalBalance || (global.validProducts.includes(global.selectedProduct.code) && global.selectedProduct.quantity == 0)"
               },
               "position": { "x": 0, "y": 0 },
               "group": "edges",
@@ -175,130 +294,11 @@
             },
             {
               "data": {
-                "id": "6ec0965c-31bd-46c1-8ff1-7096328e2683",
-                "name": "e_selected_product_error",
-                "source": "61f6c604-a812-4cc8-b12a-d93403679f99",
+                "id": "b921609e-419a-461e-b0fa-c905de938d6c",
+                "name": "e_produto_liberado",
+                "source": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
                 "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "color": "LightSteelBlue",
-                "guard": "!global.validProducts.includes(global.selectedProduct.code) || global.selectedProduct.price > global.totalBalance || (global.validProducts.includes(global.selectedProduct.code) && global.selectedProduct.quantity == 0)"
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "5920b3b4-b16d-4248-8a56-c604605de66b",
-                "name": "e_menu_compra_opcao_2",
-                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "target": "61f6c604-a812-4cc8-b12a-d93403679f99",
-                "color": "LightSteelBlue",
-                "guard": "global.purchaseMenu==2"
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "67a59327-d196-4142-9796-08820dbe80e1",
-                "name": "e_add_new_value_error",
-                "source": "691c1684-99a3-40a3-9a72-06f5dc25926d",
-                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "color": "LightSteelBlue",
-                "guard": "!global.validMoneys.includes(global.newValue)"
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "f6c7e871-7d6c-479c-9e8a-26f0ca4e5744",
-                "name": "e_menu_compra_opcao_1",
-                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "target": "691c1684-99a3-40a3-9a72-06f5dc25926d",
-                "color": "LightSteelBlue",
-                "guard": "global.purchaseMenu==1",
-                "actions": [
-                  "global.newValue = global.moneys[Math.floor(Math.random() * global.moneys.length)];"
-                ]
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "c7ce6ae4-b3e2-4501-9d28-3c5eb768f2ef",
-                "name": "e_add_new_value_success",
-                "source": "691c1684-99a3-40a3-9a72-06f5dc25926d",
-                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "color": "LightSteelBlue",
-                "guard": "global.validMoneys.includes(global.newValue)",
-                "actions": ["global.totalBalance += global.newValue;"]
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "a9c9d0ce-bbbc-403e-9655-9372d2942529",
-                "name": "e_entrega_troco",
-                "source": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
-                "target": "84bd6e63-68c5-4457-8c01-5a727a981650",
-                "color": "LightSteelBlue",
-                "actions": ["global.totalBalance = 0;"]
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "b9d60e70-ed66-438a-b642-b29052c0e150",
-                "name": "e_menu_compra_opcao_3",
-                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "target": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
-                "color": "LightSteelBlue",
-                "guard": "global.purchaseMenu==3"
+                "color": "LightSteelBlue"
               },
               "position": { "x": 0, "y": 0 },
               "group": "edges",
@@ -312,22 +312,6 @@
             }
           ],
           "nodes": [
-            {
-              "data": {
-                "id": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
-                "name": "v_libera_produto",
-                "color": "LightSteelBlue"
-              },
-              "position": { "x": 1148.0309316421572, "y": 601.188269439513 },
-              "group": "nodes",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": false,
-              "classes": ""
-            },
             {
               "data": {
                 "id": "61f6c604-a812-4cc8-b12a-d93403679f99",
@@ -390,6 +374,22 @@
                 ]
               },
               "position": { "x": 774, "y": 337 },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
+                "name": "v_libera_produto",
+                "color": "LightSteelBlue"
+              },
+              "position": { "x": 1148.0309316421572, "y": 601.188269439513 },
               "group": "nodes",
               "removed": false,
               "selected": false,
@@ -496,7 +496,7 @@
         },
         {
           "id": "f07c3fa2-3ae0-48f9-a097-1c4f07fa9850",
-          "name": "e_return_to_menu_principal",
+          "name": "e_sai_return_to_menu_principal",
           "sourceVertexId": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
           "targetVertexId": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4"
         },
@@ -531,7 +531,7 @@
         },
         {
           "id": "6440053b-1937-4f11-8723-6ce753fb57c0",
-          "name": "e_return_to_menu_principal",
+          "name": "e_gsr_return_to_menu_principal",
           "sourceVertexId": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
           "targetVertexId": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4"
         },
@@ -560,7 +560,7 @@
         {
           "id": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
           "name": "v_show_available_items",
-          "properties": { "x": 763.6439409618586, "y": -667.6350604435129 }
+          "properties": { "x": 760.6439409618586, "y": -763.6350604435129 }
         },
         {
           "id": "18509944-fa76-46ce-ac4c-dd67251e43eb",
@@ -575,7 +575,7 @@
         {
           "id": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
           "name": "v_generate_sales_report",
-          "properties": { "x": 1127.5133357560671, "y": -251.67885429151585 }
+          "properties": { "x": 1283.5133357560671, "y": -171.67885429151585 }
         },
         {
           "id": "a509521c-8c87-42ea-8384-6c8ca595fb9b",
@@ -586,15 +586,118 @@
       ],
       "editor": {
         "elements": {
+          "nodes": [
+            {
+              "data": {
+                "id": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
+                "name": "v_menu_principal",
+                "color": "LightSalmon",
+                "sharedState": "v_menu_principal",
+                "actions": [
+                  "global.mainMenu = global.mainMenuOptions[Math.floor(Math.random() * global.mainMenuOptions.length)];"
+                ]
+              },
+              "position": { "x": 760.1461437007966, "y": -413.06748285172625 },
+              "group": "nodes",
+              "removed": false,
+              "selected": true,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
+                "name": "v_show_available_items",
+                "color": "LightSteelBlue"
+              },
+              "position": { "x": 763.6439409618586, "y": -667.6350604435129 },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "18509944-fa76-46ce-ac4c-dd67251e43eb",
+                "name": "v_exit",
+                "color": "LightSteelBlue"
+              },
+              "position": { "x": 762.1695219285185, "y": -139.01555112405265 },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
+                "name": "v_start_vending_machine",
+                "color": "LightGreen"
+              },
+              "position": { "x": 338.4101623398009, "y": -415.70381029036184 },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
+                "name": "v_generate_sales_report",
+                "color": "LightSteelBlue"
+              },
+              "position": { "x": 1127.5133357560671, "y": -251.67885429151585 },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "a509521c-8c87-42ea-8384-6c8ca595fb9b",
+                "name": "v_menu_compra",
+                "color": "LightSalmon",
+                "sharedState": "v_menu_compra"
+              },
+              "position": { "x": 1124.3893784884435, "y": -537.2297647252273 },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            }
+          ],
           "edges": [
             {
               "data": {
-                "id": "b49ff95e-e3ff-4e83-927c-84620926eebf",
-                "name": "e_menu_principal_opcao_2",
+                "id": "54654ed0-6298-4fcb-ae75-e17489fd1878",
+                "name": "e_menu_principal_opcao_1",
                 "source": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "target": "a509521c-8c87-42ea-8384-6c8ca595fb9b",
+                "target": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
                 "color": "LightSteelBlue",
-                "guard": "global.mainMenu==2"
+                "guard": "global.mainMenu==1"
               },
               "position": { "x": 0, "y": 0 },
               "group": "edges",
@@ -608,9 +711,9 @@
             },
             {
               "data": {
-                "id": "6440053b-1937-4f11-8723-6ce753fb57c0",
+                "id": "f07c3fa2-3ae0-48f9-a097-1c4f07fa9850",
                 "name": "e_return_to_menu_principal",
-                "source": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
+                "source": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
                 "target": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
                 "color": "LightSteelBlue"
               },
@@ -626,30 +729,12 @@
             },
             {
               "data": {
-                "id": "de79e951-c7d0-4bcb-b0c5-7a9097f0fb74",
-                "name": "e_menu_principal_opcao_4",
+                "id": "7210e322-c456-4dd3-b143-f2e335acd629",
+                "name": "e_menu_principal_opcao_3",
                 "source": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "target": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
+                "target": "18509944-fa76-46ce-ac4c-dd67251e43eb",
                 "color": "LightSteelBlue",
-                "guard": "global.mainMenu==4"
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "395eb60f-30f2-4254-b456-41a7a099ae00",
-                "name": "e_open_menu_principal",
-                "source": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
-                "target": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "color": "LightSteelBlue"
+                "guard": "global.mainMenu==3"
               },
               "position": { "x": 0, "y": 0 },
               "group": "edges",
@@ -684,28 +769,9 @@
             },
             {
               "data": {
-                "id": "7210e322-c456-4dd3-b143-f2e335acd629",
-                "name": "e_menu_principal_opcao_3",
-                "source": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "target": "18509944-fa76-46ce-ac4c-dd67251e43eb",
-                "color": "LightSteelBlue",
-                "guard": "global.mainMenu==3"
-              },
-              "position": { "x": 0, "y": 0 },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "f07c3fa2-3ae0-48f9-a097-1c4f07fa9850",
-                "name": "e_return_to_menu_principal",
-                "source": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
+                "id": "395eb60f-30f2-4254-b456-41a7a099ae00",
+                "name": "e_open_menu_principal",
+                "source": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
                 "target": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
                 "color": "LightSteelBlue"
               },
@@ -721,12 +787,12 @@
             },
             {
               "data": {
-                "id": "54654ed0-6298-4fcb-ae75-e17489fd1878",
-                "name": "e_menu_principal_opcao_1",
+                "id": "de79e951-c7d0-4bcb-b0c5-7a9097f0fb74",
+                "name": "e_menu_principal_opcao_4",
                 "source": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "target": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
+                "target": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
                 "color": "LightSteelBlue",
-                "guard": "global.mainMenu==1"
+                "guard": "global.mainMenu==4"
               },
               "position": { "x": 0, "y": 0 },
               "group": "edges",
@@ -737,108 +803,42 @@
               "grabbable": true,
               "pannable": true,
               "classes": ""
-            }
-          ],
-          "nodes": [
-            {
-              "data": {
-                "id": "a509521c-8c87-42ea-8384-6c8ca595fb9b",
-                "name": "v_menu_compra",
-                "color": "LightSalmon",
-                "sharedState": "v_menu_compra"
-              },
-              "position": { "x": 1124.3893784884435, "y": -537.2297647252273 },
-              "group": "nodes",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": false,
-              "classes": ""
             },
             {
               "data": {
-                "id": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
-                "name": "v_generate_sales_report",
+                "id": "6440053b-1937-4f11-8723-6ce753fb57c0",
+                "name": "e_return_to_menu_principal",
+                "source": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
+                "target": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
                 "color": "LightSteelBlue"
               },
-              "position": { "x": 1127.5133357560671, "y": -251.67885429151585 },
-              "group": "nodes",
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
               "removed": false,
               "selected": false,
               "selectable": true,
               "locked": false,
               "grabbable": true,
-              "pannable": false,
+              "pannable": true,
               "classes": ""
             },
             {
               "data": {
-                "id": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
-                "name": "v_start_vending_machine",
-                "color": "LightGreen"
+                "id": "b49ff95e-e3ff-4e83-927c-84620926eebf",
+                "name": "e_menu_principal_opcao_2",
+                "source": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
+                "target": "a509521c-8c87-42ea-8384-6c8ca595fb9b",
+                "color": "LightSteelBlue",
+                "guard": "global.mainMenu==2"
               },
-              "position": { "x": 338.4101623398009, "y": -415.70381029036184 },
-              "group": "nodes",
+              "position": { "x": 0, "y": 0 },
+              "group": "edges",
               "removed": false,
               "selected": false,
               "selectable": true,
               "locked": false,
               "grabbable": true,
-              "pannable": false,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "18509944-fa76-46ce-ac4c-dd67251e43eb",
-                "name": "v_exit",
-                "color": "LightSteelBlue"
-              },
-              "position": { "x": 762.1695219285185, "y": -139.01555112405265 },
-              "group": "nodes",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": false,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
-                "name": "v_show_available_items",
-                "color": "LightSteelBlue"
-              },
-              "position": { "x": 763.6439409618586, "y": -667.6350604435129 },
-              "group": "nodes",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": false,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "name": "v_menu_principal",
-                "color": "LightSalmon",
-                "sharedState": "v_menu_principal",
-                "actions": [
-                  "global.mainMenu = global.mainMenuOptions[Math.floor(Math.random() * global.mainMenuOptions.length)];"
-                ]
-              },
-              "position": { "x": 760.1461437007966, "y": -413.06748285172625 },
-              "group": "nodes",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": false,
+              "pannable": true,
               "classes": ""
             }
           ]
@@ -906,6 +906,6 @@
       }
     }
   ],
-  "selectedModelIndex": 0,
-  "selectedElementId": null
+  "selectedModelIndex": 1,
+  "selectedElementId": "6440053b-1937-4f11-8723-6ce753fb57c0"
 }
