@@ -12,7 +12,8 @@ import java.io.IOException;
 public class VendingMachineGeneralTest implements VendingMachineGeneral, VendingMachineBuyingMenu {
     private VendingMachine testVM;
     private int salesReportCount = 0;
-    // IO var;
+    private String screen;
+    private boolean error = false;
 
     @Before
     public void setUp() {
@@ -29,17 +30,17 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void v_start_vending_machine() {
+    public void v_start_vending_machine() { // OK
         testVM.getInventory().values()
                 .forEach(product -> assertEquals(5, product.getQuantity()));
         assertEquals(0, testVM.getMachineBalance(), 0.0001);
     }
 
     @Override
-    public void v_exit() {}
+    public void v_exit() {} // OK
 
     @Override
-    public void v_generate_sales_report() {
+    public void v_generate_sales_report() { // Ok
         int currentCount = -1;
         File salesReportsDir = new File("sales-reports");
         if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
@@ -64,7 +65,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void v_show_available_items() {}
+    public void v_show_available_items() {} // OK
 
     @Override
     public void e_gsr_return_to_menu_principal() {
@@ -75,7 +76,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     public void e_sai_return_to_menu_principal() {}
 
     @Override
-    public void v_menu_principal() {
+    public void v_menu_principal() { // OK
         assertEquals(0, testVM.getMachineBalance(), 0.0001);
     }
 
@@ -94,12 +95,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_selected_product_error() {
-        //TODO: validade IO error message == error message
+        testVM.transaction("Z1");
     }
 
     @Override
     public void e_add_new_value_success() {
-        //TODO: how to add a specified value to the balance (random?)
+        testVM.addMoney(20);
     }
 
     @Override
@@ -112,21 +113,21 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     public void e_menu_principal_opcao_1() {}
 
     @Override
-    public void v_menu_compra() {
-        assertEquals(0, testVM.getMachineBalance(), 0.0001);
-    }
+    public void v_menu_compra() {}
 
     @Override
-    public void v_libera_produto() {}
+    public void v_libera_produto() {} // Ok
 
     @Override
-    public void v_espera_produto() {}
+    public void v_espera_produto() {
+        // Assert screen
+    } // Ok
 
     @Override
     public void e_menu_compra_opcao_1() {}
 
     @Override
-    public void v_termina() {}
+    public void v_termina() {} // Ok
 
     @Override
     public void e_menu_compra_opcao_3() {}
@@ -139,7 +140,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_add_new_value_error() {
-        //TODO: validade IO error message == error message
+        errorMessage = "INVALID INPUT. Please enter 1, 2, 5, 10, or 20.";
     }
 
     @Override
@@ -151,7 +152,9 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void v_espera_moeda() {}
+    public void v_espera_moeda() {
+        // Assert IO?
+    } // Ok
 
     @Test
     public void testPath1() {

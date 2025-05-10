@@ -39,25 +39,11 @@
           ]
         },
         {
-          "id": "67a59327-d196-4142-9796-08820dbe80e1",
-          "name": "e_add_new_value_error",
-          "sourceVertexId": "691c1684-99a3-40a3-9a72-06f5dc25926d",
-          "targetVertexId": "6d335642-99f0-4540-b421-8e5f103cc35d",
-          "guard": "!global.validMoneys.includes(global.newValue)"
-        },
-        {
           "id": "5920b3b4-b16d-4248-8a56-c604605de66b",
           "name": "e_menu_compra_opcao_2",
           "sourceVertexId": "6d335642-99f0-4540-b421-8e5f103cc35d",
           "targetVertexId": "61f6c604-a812-4cc8-b12a-d93403679f99",
           "guard": "global.purchaseMenu==2"
-        },
-        {
-          "id": "6ec0965c-31bd-46c1-8ff1-7096328e2683",
-          "name": "e_selected_product_error",
-          "sourceVertexId": "61f6c604-a812-4cc8-b12a-d93403679f99",
-          "targetVertexId": "6d335642-99f0-4540-b421-8e5f103cc35d",
-          "guard": "!global.validProducts.includes(global.selectedProduct.code) || global.selectedProduct.price > global.totalBalance || (global.validProducts.includes(global.selectedProduct.code) && global.selectedProduct.quantity == 0)"
         },
         {
           "id": "03a457e1-6b97-419b-b467-73ae73349212",
@@ -75,6 +61,32 @@
           "name": "e_produto_liberado",
           "sourceVertexId": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
           "targetVertexId": "6d335642-99f0-4540-b421-8e5f103cc35d"
+        },
+        {
+          "id": "2647a167-051e-47c3-94b7-468e9ed4a83a",
+          "name": "e_eme_return_menu_compra",
+          "sourceVertexId": "f5a0f002-edde-4351-959b-83fedf3b2d16",
+          "targetVertexId": "6d335642-99f0-4540-b421-8e5f103cc35d"
+        },
+        {
+          "id": "9d892d07-af46-4df5-9004-c593d4261e43",
+          "name": "e_add_new_value_error",
+          "sourceVertexId": "691c1684-99a3-40a3-9a72-06f5dc25926d",
+          "targetVertexId": "f5a0f002-edde-4351-959b-83fedf3b2d16",
+          "guard": "!global.validMoneys.includes(global.newValue)"
+        },
+        {
+          "id": "27506adc-4fce-4a6d-b50d-3f6f7e6cadd2",
+          "name": "e_selected_product_error",
+          "sourceVertexId": "61f6c604-a812-4cc8-b12a-d93403679f99",
+          "targetVertexId": "a4fa3031-0f1d-487e-aa3a-439b92add929",
+          "guard": "!global.validProducts.includes(global.selectedProduct.code) || global.selectedProduct.price > global.totalBalance || (global.validProducts.includes(global.selectedProduct.code) && global.selectedProduct.quantity == 0)"
+        },
+        {
+          "id": "ee155b6d-b65b-4c9e-85b5-f0127f7d6f6a",
+          "name": "e_epe_return_menu_compra",
+          "sourceVertexId": "a4fa3031-0f1d-487e-aa3a-439b92add929",
+          "targetVertexId": "6d335642-99f0-4540-b421-8e5f103cc35d"
         }
       ],
       "generator": "random(edge_coverage(100))",
@@ -86,8 +98,8 @@
           "id": "84bd6e63-68c5-4457-8c01-5a727a981650",
           "name": "v_menu_principal",
           "properties": {
-            "x": 492,
-            "y": 601
+            "x": 474.4948109833348,
+            "y": 576
           },
           "sharedState": "v_menu_principal"
         },
@@ -95,8 +107,8 @@
           "id": "6d335642-99f0-4540-b421-8e5f103cc35d",
           "name": "v_menu_compra",
           "properties": {
-            "x": 774,
-            "y": 337
+            "x": 848.4696722263474,
+            "y": 321.06383497054844
           },
           "actions": [
             "global.purchaseMenu = global.purchaseMenuOptions[Math.floor(Math.random() * global.purchaseMenuOptions.length)];"
@@ -107,24 +119,24 @@
           "id": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
           "name": "v_termina",
           "properties": {
-            "x": 774,
-            "y": 601
+            "x": 848.0782895122653,
+            "y": 573.9419984944666
           }
         },
         {
           "id": "691c1684-99a3-40a3-9a72-06f5dc25926d",
           "name": "v_espera_moeda",
           "properties": {
-            "x": 770.5961376321617,
-            "y": 66.06226914110539
+            "x": 853.2870267090673,
+            "y": 31.719460778143336
           }
         },
         {
           "id": "61f6c604-a812-4cc8-b12a-d93403679f99",
           "name": "v_espera_produto",
           "properties": {
-            "x": 1142.0309316421572,
-            "y": 328.18826943951296
+            "x": 1314.4277672064309,
+            "y": 322.1337901595148
           },
           "actions": [
             "global.selectedProduct = global.products[Math.floor(Math.random() * global.products.length)];"
@@ -134,8 +146,24 @@
           "id": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
           "name": "v_libera_produto",
           "properties": {
-            "x": 1148.0309316421572,
-            "y": 601.188269439513
+            "x": 1322.8362480615224,
+            "y": 598.7689445483834
+          }
+        },
+        {
+          "id": "f5a0f002-edde-4351-959b-83fedf3b2d16",
+          "name": "v_espera_moeda_error",
+          "properties": {
+            "x": 425,
+            "y": 29.926049474012245
+          }
+        },
+        {
+          "id": "a4fa3031-0f1d-487e-aa3a-439b92add929",
+          "name": "v_espera_produto_error",
+          "properties": {
+            "x": 1308.1209911241435,
+            "y": 53.68434241786986
           }
         }
       ],
@@ -161,6 +189,77 @@
                 "source": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
                 "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
                 "color": "LightSteelBlue"
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "6ec0965c-31bd-46c1-8ff1-7096328e2683",
+                "name": "e_selected_product_error",
+                "source": "61f6c604-a812-4cc8-b12a-d93403679f99",
+                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "color": "LightSteelBlue",
+                "guard": "!global.validProducts.includes(global.selectedProduct.code) || global.selectedProduct.price > global.totalBalance || (global.validProducts.includes(global.selectedProduct.code) && global.selectedProduct.quantity == 0)"
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "f6c7e871-7d6c-479c-9e8a-26f0ca4e5744",
+                "name": "e_menu_compra_opcao_1",
+                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "target": "691c1684-99a3-40a3-9a72-06f5dc25926d",
+                "color": "LightSteelBlue",
+                "guard": "global.purchaseMenu==1",
+                "actions": [
+                  "global.newValue = global.moneys[Math.floor(Math.random() * global.moneys.length)];"
+                ]
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "a9c9d0ce-bbbc-403e-9655-9372d2942529",
+                "name": "e_entrega_troco",
+                "source": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
+                "target": "84bd6e63-68c5-4457-8c01-5a727a981650",
+                "color": "LightSteelBlue",
+                "actions": [
+                  "global.totalBalance = 0;"
+                ]
               },
               "position": {
                 "x": 0,
@@ -203,81 +302,12 @@
             },
             {
               "data": {
-                "id": "6ec0965c-31bd-46c1-8ff1-7096328e2683",
-                "name": "e_selected_product_error",
-                "source": "61f6c604-a812-4cc8-b12a-d93403679f99",
-                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "color": "LightSteelBlue",
-                "guard": "!global.validProducts.includes(global.selectedProduct.code) || global.selectedProduct.price > global.totalBalance || (global.validProducts.includes(global.selectedProduct.code) && global.selectedProduct.quantity == 0)"
-              },
-              "position": {
-                "x": 0,
-                "y": 0
-              },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "5920b3b4-b16d-4248-8a56-c604605de66b",
-                "name": "e_menu_compra_opcao_2",
+                "id": "b9d60e70-ed66-438a-b642-b29052c0e150",
+                "name": "e_menu_compra_opcao_3",
                 "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "target": "61f6c604-a812-4cc8-b12a-d93403679f99",
+                "target": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
                 "color": "LightSteelBlue",
-                "guard": "global.purchaseMenu==2"
-              },
-              "position": {
-                "x": 0,
-                "y": 0
-              },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "67a59327-d196-4142-9796-08820dbe80e1",
-                "name": "e_add_new_value_error",
-                "source": "691c1684-99a3-40a3-9a72-06f5dc25926d",
-                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "color": "LightSteelBlue",
-                "guard": "!global.validMoneys.includes(global.newValue)"
-              },
-              "position": {
-                "x": 0,
-                "y": 0
-              },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "f6c7e871-7d6c-479c-9e8a-26f0ca4e5744",
-                "name": "e_menu_compra_opcao_1",
-                "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "target": "691c1684-99a3-40a3-9a72-06f5dc25926d",
-                "color": "LightSteelBlue",
-                "guard": "global.purchaseMenu==1",
-                "actions": [
-                  "global.newValue = global.moneys[Math.floor(Math.random() * global.moneys.length)];"
-                ]
+                "guard": "global.purchaseMenu==3"
               },
               "position": {
                 "x": 0,
@@ -319,14 +349,12 @@
             },
             {
               "data": {
-                "id": "a9c9d0ce-bbbc-403e-9655-9372d2942529",
-                "name": "e_entrega_troco",
-                "source": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
-                "target": "84bd6e63-68c5-4457-8c01-5a727a981650",
+                "id": "67a59327-d196-4142-9796-08820dbe80e1",
+                "name": "e_add_new_value_error",
+                "source": "691c1684-99a3-40a3-9a72-06f5dc25926d",
+                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
                 "color": "LightSteelBlue",
-                "actions": [
-                  "global.totalBalance = 0;"
-                ]
+                "guard": "!global.validMoneys.includes(global.newValue)"
               },
               "position": {
                 "x": 0,
@@ -343,12 +371,96 @@
             },
             {
               "data": {
-                "id": "b9d60e70-ed66-438a-b642-b29052c0e150",
-                "name": "e_menu_compra_opcao_3",
+                "id": "5920b3b4-b16d-4248-8a56-c604605de66b",
+                "name": "e_menu_compra_opcao_2",
                 "source": "6d335642-99f0-4540-b421-8e5f103cc35d",
-                "target": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
+                "target": "61f6c604-a812-4cc8-b12a-d93403679f99",
                 "color": "LightSteelBlue",
-                "guard": "global.purchaseMenu==3"
+                "guard": "global.purchaseMenu==2"
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "2647a167-051e-47c3-94b7-468e9ed4a83a",
+                "name": "e_NewEdge",
+                "source": "f5a0f002-edde-4351-959b-83fedf3b2d16",
+                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "color": "LightSteelBlue"
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "9d892d07-af46-4df5-9004-c593d4261e43",
+                "name": "e_NewEdge",
+                "source": "691c1684-99a3-40a3-9a72-06f5dc25926d",
+                "target": "f5a0f002-edde-4351-959b-83fedf3b2d16",
+                "color": "LightSteelBlue"
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "27506adc-4fce-4a6d-b50d-3f6f7e6cadd2",
+                "name": "e_NewEdge",
+                "source": "61f6c604-a812-4cc8-b12a-d93403679f99",
+                "target": "a4fa3031-0f1d-487e-aa3a-439b92add929",
+                "color": "LightSteelBlue"
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "ee155b6d-b65b-4c9e-85b5-f0127f7d6f6a",
+                "name": "e_NewEdge",
+                "source": "a4fa3031-0f1d-487e-aa3a-439b92add929",
+                "target": "6d335642-99f0-4540-b421-8e5f103cc35d",
+                "color": "LightSteelBlue"
               },
               "position": {
                 "x": 0,
@@ -367,13 +479,32 @@
           "nodes": [
             {
               "data": {
-                "id": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
-                "name": "v_libera_produto",
+                "id": "691c1684-99a3-40a3-9a72-06f5dc25926d",
+                "name": "v_espera_moeda",
                 "color": "LightSteelBlue"
               },
               "position": {
-                "x": 1148.0309316421572,
-                "y": 601.188269439513
+                "x": 770.5961376321617,
+                "y": 66.06226914110539
+              },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
+                "name": "v_termina",
+                "color": "LightSteelBlue"
+              },
+              "position": {
+                "x": 774,
+                "y": 601
               },
               "group": "nodes",
               "removed": false,
@@ -408,32 +539,13 @@
             },
             {
               "data": {
-                "id": "691c1684-99a3-40a3-9a72-06f5dc25926d",
-                "name": "v_espera_moeda",
+                "id": "23fc1f16-3fb2-4184-9aca-c9a64e14eeb2",
+                "name": "v_libera_produto",
                 "color": "LightSteelBlue"
               },
               "position": {
-                "x": 770.5961376321617,
-                "y": 66.06226914110539
-              },
-              "group": "nodes",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": false,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "0b791b17-fb37-4a5c-b2dc-80bbac8c84f3",
-                "name": "v_termina",
-                "color": "LightSteelBlue"
-              },
-              "position": {
-                "x": 774,
-                "y": 601
+                "x": 1148.0309316421572,
+                "y": 601.188269439513
               },
               "group": "nodes",
               "removed": false,
@@ -477,6 +589,44 @@
               "position": {
                 "x": 492,
                 "y": 601
+              },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "f5a0f002-edde-4351-959b-83fedf3b2d16",
+                "name": "v_NewVertex",
+                "color": "LightSteelBlue"
+              },
+              "position": {
+                "x": 547,
+                "y": 204
+              },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "a4fa3031-0f1d-487e-aa3a-439b92add929",
+                "name": "v_NewVertex",
+                "color": "LightSteelBlue"
+              },
+              "position": {
+                "x": 1064,
+                "y": 171
               },
               "group": "nodes",
               "removed": false,
@@ -774,14 +924,33 @@
             },
             {
               "data": {
-                "id": "a60d0ef8-1c9e-49cd-8b8c-4305c4453329",
-                "name": "e_restart_machine",
-                "source": "18509944-fa76-46ce-ac4c-dd67251e43eb",
-                "target": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
+                "id": "54654ed0-6298-4fcb-ae75-e17489fd1878",
+                "name": "e_menu_principal_opcao_1",
+                "source": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
+                "target": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
                 "color": "LightSteelBlue",
-                "actions": [
-                  "global.products = [{ code: \"A1\", quantity: 5, price: 3.05 },{ code: \"A2\", quantity: 5, price: 1.45 },{ code: \"Z1\", quantity: 5, price: 3.05 },{ code: \"Z2\", quantity: 5, price: 1.45 }];"
-                ]
+                "guard": "global.mainMenu==1"
+              },
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "group": "edges",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": true,
+              "classes": ""
+            },
+            {
+              "data": {
+                "id": "f07c3fa2-3ae0-48f9-a097-1c4f07fa9850",
+                "name": "e_sai_return_to_menu_principal",
+                "source": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
+                "target": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
+                "color": "LightSteelBlue"
               },
               "position": {
                 "x": 0,
@@ -820,33 +989,14 @@
             },
             {
               "data": {
-                "id": "f07c3fa2-3ae0-48f9-a097-1c4f07fa9850",
-                "name": "e_sai_return_to_menu_principal",
-                "source": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
-                "target": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "color": "LightSteelBlue"
-              },
-              "position": {
-                "x": 0,
-                "y": 0
-              },
-              "group": "edges",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": true,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "54654ed0-6298-4fcb-ae75-e17489fd1878",
-                "name": "e_menu_principal_opcao_1",
-                "source": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "target": "6fbc8cc5-c5c0-4404-af10-ebf27339cc6e",
+                "id": "a60d0ef8-1c9e-49cd-8b8c-4305c4453329",
+                "name": "e_restart_machine",
+                "source": "18509944-fa76-46ce-ac4c-dd67251e43eb",
+                "target": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
                 "color": "LightSteelBlue",
-                "guard": "global.mainMenu==1"
+                "actions": [
+                  "global.products = [{ code: \"A1\", quantity: 5, price: 3.05 },{ code: \"A2\", quantity: 5, price: 1.45 },{ code: \"Z1\", quantity: 5, price: 3.05 },{ code: \"Z2\", quantity: 5, price: 1.45 }];"
+                ]
               },
               "position": {
                 "x": 0,
@@ -885,6 +1035,25 @@
             },
             {
               "data": {
+                "id": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
+                "name": "v_start_vending_machine",
+                "color": "LightGreen"
+              },
+              "position": {
+                "x": 338.4101623398009,
+                "y": -415.70381029036184
+              },
+              "group": "nodes",
+              "removed": false,
+              "selected": false,
+              "selectable": true,
+              "locked": false,
+              "grabbable": true,
+              "pannable": false,
+              "classes": ""
+            },
+            {
+              "data": {
                 "id": "1d474c84-8ddb-4f6f-9f03-a68a6ba6db29",
                 "name": "v_generate_sales_report",
                 "color": "LightSteelBlue"
@@ -904,13 +1073,17 @@
             },
             {
               "data": {
-                "id": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
-                "name": "v_start_vending_machine",
-                "color": "LightGreen"
+                "id": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
+                "name": "v_menu_principal",
+                "color": "LightSalmon",
+                "sharedState": "v_menu_principal",
+                "actions": [
+                  "global.mainMenu = global.mainMenuOptions[Math.floor(Math.random() * global.mainMenuOptions.length)];"
+                ]
               },
               "position": {
-                "x": 338.4101623398009,
-                "y": -415.70381029036184
+                "x": 760.1461437007966,
+                "y": -413.06748285172625
               },
               "group": "nodes",
               "removed": false,
@@ -949,29 +1122,6 @@
               "position": {
                 "x": 763.6439409618586,
                 "y": -667.6350604435129
-              },
-              "group": "nodes",
-              "removed": false,
-              "selected": false,
-              "selectable": true,
-              "locked": false,
-              "grabbable": true,
-              "pannable": false,
-              "classes": ""
-            },
-            {
-              "data": {
-                "id": "c305af2d-1fe6-43ad-8246-b5cdbf01e7c4",
-                "name": "v_menu_principal",
-                "color": "LightSalmon",
-                "sharedState": "v_menu_principal",
-                "actions": [
-                  "global.mainMenu = global.mainMenuOptions[Math.floor(Math.random() * global.mainMenuOptions.length)];"
-                ]
-              },
-              "position": {
-                "x": 760.1461437007966,
-                "y": -413.06748285172625
               },
               "group": "nodes",
               "removed": false,
