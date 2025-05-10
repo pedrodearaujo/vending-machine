@@ -32,7 +32,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void v_start_vending_machine() { // OK
+    public void v_start_vending_machine() {
         testVM.getInventory().values()
                 .forEach(product -> assertEquals(5, product.getQuantity()));
         assertEquals(0, testVM.getMachineBalance(), 0.0001);
@@ -40,10 +40,10 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_exit() {
-    } // OK
+    }
 
     @Override
-    public void v_generate_sales_report() { // Ok
+    public void v_generate_sales_report() {
         int currentCount = -1;
         File salesReportsDir = new File("sales-reports");
         if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
@@ -69,7 +69,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_show_available_items() {
-    } // OK
+    }
 
     @Override
     public void e_gsr_return_to_menu_principal() {
@@ -81,7 +81,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void v_menu_principal() { // OK
+    public void v_menu_principal() {
         assertEquals(0, testVM.getMachineBalance(), 0.0001);
     }
 
@@ -102,11 +102,9 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     @Override
     public void e_selected_product_error() {
         try {
-            // TODO: Tem varios erros, estamos fazendo somente o de produto invalido
             testVM.transaction("Z1");
         } catch (Exception e) {
             error = true;
-            // TODO: Aqui pode ter varios tipos de erro, o que fazer?
             screen = "INVALID INPUT. Please try again and enter a valid item code.";
         }
     }
@@ -134,14 +132,13 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_libera_produto() {
-        // TODO: Verificar se o estoque do produto foi reduzido??
         assertEquals(testVM.getInventory().get(ITEM_CODE).getQuantity(), currentItemStock - 1);
-    } // Ok
+    }
 
     @Override
     public void v_espera_produto() {
         // Assert screen
-    } // Ok
+    }
 
     @Override
     public void e_menu_compra_opcao_1() {
@@ -149,7 +146,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_termina() {
-    } // Ok
+    }
 
     @Override
     public void e_menu_compra_opcao_3() {
@@ -183,12 +180,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     @Override
     public void v_espera_moeda() {
         // Assert IO?
-    } // Ok
+    }
 
     @Override
     public void v_espera_produto_error() {
         if (error) {
-            assertEquals(screen, "INVALID INPUT. Please try again and enter a valid item code.");
+            assertEquals("INVALID INPUT. Please try again and enter a valid item code.", screen);
         }
     }
 
@@ -202,7 +199,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     @Override
     public void v_espera_moeda_error() {
         if (error) {
-            assertEquals(screen, "INVALID INPUT. Please enter 1, 2, 5, 10, or 20.");
+            assertEquals("INVALID INPUT. Please enter 1, 2, 5, 10, or 20.", screen);
         }
     }
 
@@ -239,6 +236,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted, failed to complete sleep.");
+        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_2();
@@ -263,7 +266,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Test
-    public void testPath2() { // ok
+    public void testPath2() {
         v_start_vending_machine();
         e_open_menu_principal();
         v_menu_principal();
@@ -281,6 +284,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         }
         e_menu_principal_opcao_4();
         v_generate_sales_report();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted, failed to complete sleep.");
+        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_3();
@@ -295,6 +304,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted, failed to complete sleep.");
+        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_1();
@@ -313,6 +328,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted, failed to complete sleep.");
+        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_1();
@@ -373,5 +394,3 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_libera_produto();
     }
 }
-
-// FALTA O ENTREGA TROCO
