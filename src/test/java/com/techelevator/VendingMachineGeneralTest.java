@@ -171,7 +171,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
-        // e_return_to_menu_principal();
+        // e_gsr_return_to_menu_principal();
         // v_menu_principal();
         // v_menu_principal();
         // v_menu_principal();

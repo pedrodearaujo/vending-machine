@@ -25,11 +25,11 @@ v_menu_principal
 v_menu_principal
 e_menu_principal_opcao_1
 v_show_available_items
-e_return_to_menu_principal
+e_sai_return_to_menu_principal
 v_menu_principal
 e_menu_principal_opcao_1
 v_show_available_items
-e_return_to_menu_principal
+e_sai_return_to_menu_principal
 v_menu_principal
 e_menu_principal_opcao_3
 v_exit
