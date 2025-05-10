@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,28 +30,9 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     public void v_exit() {
     }
 
-    @Override
-    public void e_seleciona_opcao_2() {
-    }
-
-    @Override
-    public void e_seleciona_opcao_1() {
-    }
-
-    @Override
-    public void e_seleciona_opcao_4() {
-    }
-
-    @Override
-    public void e_seleciona_opcao_3() {
-    }
 
     @Override
     public void v_generate_sales_report() {
-    }
-
-    @Override
-    public void e_return_to_menu() {
     }
 
     @Override
@@ -62,11 +44,46 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
+    public void e_return_to_menu_principal() {
+
+    }
+
+    @Override
     public void v_menu_principal() {
     }
 
     @Override
+    public void e_menu_principal_opcao_4() {
+
+    }
+
+    @Override
+    public void e_menu_principal_opcao_3() {
+
+    }
+
+    @Override
+    public void e_selected_product_error() {
+
+    }
+
+    @Override
+    public void e_add_new_value_success() {
+
+    }
+
+    @Override
     public void e_open_menu_principal() {
+    }
+
+    @Override
+    public void e_menu_principal_opcao_2() {
+
+    }
+
+    @Override
+    public void e_menu_principal_opcao_1() {
+
     }
 
     @Override
@@ -82,7 +99,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void e_add_newValue() {
+    public void e_menu_compra_opcao_1() {
+
     }
 
     @Override
@@ -90,15 +108,31 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
+    public void e_menu_compra_opcao_3() {
+
+    }
+
+    @Override
     public void e_produto_liberado() {
     }
 
     @Override
-    public void e_selectedProduct() {
+    public void e_menu_compra_opcao_2() {
+
+    }
+
+    @Override
+    public void e_add_new_value_error() {
+
     }
 
     @Override
     public void e_entrega_troco() {
+    }
+
+    @Override
+    public void e_selected_product_success() {
+
     }
 
     @Override
@@ -108,22 +142,17 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     @Test
     public void testPath1() {
         v_start_vending_machine();
-        // e_open_menu_principal();
-        // v_menu_principal();
-        // e_seleciona_opcao_2();
-        // v_menu_compra();
-        // e_seleciona_opcao_2();
-        // v_espera_produto();
-        // e_selectedProduct();
-        // v_menu_compra();
-        // e_seleciona_opcao_3();
-        // v_termina();
-        // e_entrega_troco();
-        // v_menu_principal();
-        // v_menu_principal();
-        // e_seleciona_opcao_3();
-        // v_exit();
-        // e_restart_machine();
+        e_open_menu_principal();
+//        v_menu_principal();
+//        e_menu_principal_opcao_4();
+//        v_generate_sales_report();
+//        e_return_to_menu_principal();
+//        v_menu_principal();
+//        v_menu_principal();
+//        v_menu_principal();
+//        e_menu_principal_opcao_3();
+//        v_exit();
+//        e_restart_machine();
     }
 }
 
