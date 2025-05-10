@@ -5,13 +5,21 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class VendingMachineGeneralTest implements VendingMachineGeneral, VendingMachineBuyingMenu {
     private VendingMachine testVM;
+    private int salesReportCount = 0;
 
     @Before
     public void setUp() {
+        File salesReportsDir = new File("sales-reports");
+        if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
+            File[] salesReportFiles = salesReportsDir.listFiles();
+            salesReportCount = salesReportFiles != null ? salesReportFiles.length : 0;
+        }
         try {
             testVM = new VendingMachine();
         } catch (IOException e) {
@@ -33,6 +41,13 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_generate_sales_report() {
+        int currentCount = -1;
+        File salesReportsDir = new File("sales-reports");
+        if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
+            File[] salesReportFiles = salesReportsDir.listFiles();
+            currentCount = salesReportFiles != null ? salesReportFiles.length : 0;
+        }
+        assertEquals(currentCount, salesReportCount);
     }
 
     @Override
@@ -50,11 +65,17 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_menu_principal() {
+        assertEquals(0, testVM.getMachineBalance(), 0.0001);
     }
 
     @Override
     public void e_menu_principal_opcao_4() {
-
+        VendingMachineSalesReport salesReport = new VendingMachineSalesReport(testVM);
+        try {
+            salesReport.generateSalesReport();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error while trying to write sales report. Please try again.");
+        }
     }
 
     @Override
@@ -143,9 +164,9 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     public void testPath1() {
         v_start_vending_machine();
         e_open_menu_principal();
-//        v_menu_principal();
-//        e_menu_principal_opcao_4();
-//        v_generate_sales_report();
+        v_menu_principal();
+        e_menu_principal_opcao_4();
+        v_generate_sales_report();
 //        e_return_to_menu_principal();
 //        v_menu_principal();
 //        v_menu_principal();
