@@ -75,7 +75,7 @@
       ],
       "generator": "random(edge_coverage(100))",
       "id": "497160ab-1ff6-4c67-bef0-c6f353527151",
-      "name": "Modelos",
+      "name": "VendingMachineBuyingMenu",
       "startElementId": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
       "vertices": [
         {
@@ -545,7 +545,7 @@
       ],
       "generator": "random(edge_coverage(100))",
       "id": "497160ab-1ff6-4c67-bef0-c6f353527151",
-      "name": "Modelos2",
+      "name": "VendingMachineGeneral",
       "startElementId": "02dc928b-9e9d-4a6a-9a31-9ae85f81409c",
       "vertices": [
         {
