@@ -37,7 +37,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void v_exit() {} // OK
+    public void v_exit() {
+    } // OK
 
     @Override
     public void v_generate_sales_report() { // Ok
@@ -65,7 +66,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void v_show_available_items() {} // OK
+    public void v_show_available_items() {
+    } // OK
 
     @Override
     public void e_gsr_return_to_menu_principal() {
@@ -73,7 +75,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void e_sai_return_to_menu_principal() {}
+    public void e_sai_return_to_menu_principal() {
+    }
 
     @Override
     public void v_menu_principal() { // OK
@@ -91,7 +94,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void e_menu_principal_opcao_3() {}
+    public void e_menu_principal_opcao_3() {
+    }
 
     @Override
     public void e_selected_product_error() {
@@ -104,19 +108,24 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Override
-    public void e_open_menu_principal() {}
+    public void e_open_menu_principal() {
+    }
 
     @Override
-    public void e_menu_principal_opcao_2() {}
+    public void e_menu_principal_opcao_2() {
+    }
 
     @Override
-    public void e_menu_principal_opcao_1() {}
+    public void e_menu_principal_opcao_1() {
+    }
 
     @Override
-    public void v_menu_compra() {}
+    public void v_menu_compra() {
+    }
 
     @Override
-    public void v_libera_produto() {} // Ok
+    public void v_libera_produto() {
+    } // Ok
 
     @Override
     public void v_espera_produto() {
@@ -124,27 +133,32 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     } // Ok
 
     @Override
-    public void e_menu_compra_opcao_1() {}
-
-    @Override
-    public void v_termina() {} // Ok
-
-    @Override
-    public void e_menu_compra_opcao_3() {}
-
-    @Override
-    public void e_produto_liberado() {}
-
-    @Override
-    public void e_menu_compra_opcao_2() {}
-
-    @Override
-    public void e_add_new_value_error() {
-        errorMessage = "INVALID INPUT. Please enter 1, 2, 5, 10, or 20.";
+    public void e_menu_compra_opcao_1() {
     }
 
     @Override
-    public void e_entrega_troco() {}
+    public void v_termina() {
+    } // Ok
+
+    @Override
+    public void e_menu_compra_opcao_3() {
+    }
+
+    @Override
+    public void e_produto_liberado() {
+    }
+
+    @Override
+    public void e_menu_compra_opcao_2() {
+    }
+
+    @Override
+    public void e_add_new_value_error() {
+    }
+
+    @Override
+    public void e_entrega_troco() {
+    }
 
     @Override
     public void e_selected_product_success() {
@@ -156,10 +170,84 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         // Assert IO?
     } // Ok
 
+    @Override
+    public void v_espera_produto_error() {
+
+    }
+
+    @Override
+    public void e_epe_return_menu_compra() {
+
+    }
+
+    @Override
+    public void v_espera_moeda_error() {
+
+    }
+
+    @Override
+    public void e_eme_return_menu_compra() {
+
+    }
+
     @Test
     public void testPath1() {
         v_start_vending_machine();
         e_open_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_2();
+        v_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_1();
+        v_espera_moeda();
+        e_add_new_value_success();
+        v_menu_compra();
+        e_menu_compra_opcao_2();
+        v_espera_produto();
+        e_selected_product_error();
+        v_espera_produto_error();
+        e_epe_return_menu_compra();
+        v_menu_compra();
+        v_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_3();
+        v_termina();
+        e_entrega_troco();
+        v_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_4();
+        v_generate_sales_report();
+        e_gsr_return_to_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_2();
+        v_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_2();
+        v_espera_produto();
+        e_selected_product_error();
+        v_espera_produto_error();
+        e_epe_return_menu_compra();
+        v_menu_compra();
+        v_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_3();
+        v_termina();
+        e_entrega_troco();
+        v_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_3();
+        v_exit();
+        e_restart_machine();
+    }
+
+    @Test
+    public void testPath2() { // ok
+        v_start_vending_machine();
+        e_open_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_4();
+        v_generate_sales_report();
+        e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
@@ -171,23 +259,15 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     @Test
-    public void testPath2() {
-        v_start_vending_machine();
-        e_open_menu_principal();
-        v_menu_principal();
-        e_menu_principal_opcao_3();
-        v_exit();
-        e_restart_machine();
-    }
-
-    @Test
     public void testPath3() {
         v_start_vending_machine();
         e_open_menu_principal();
         v_menu_principal();
-        e_menu_principal_opcao_1();
-        v_show_available_items();
-        e_sai_return_to_menu_principal();
+        e_menu_principal_opcao_4();
+        v_generate_sales_report();
+        e_gsr_return_to_menu_principal();
+        v_menu_principal();
+        v_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_1();
         v_show_available_items();
@@ -203,36 +283,75 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_start_vending_machine();
         e_open_menu_principal();
         v_menu_principal();
+        e_menu_principal_opcao_4();
+        v_generate_sales_report();
+        e_gsr_return_to_menu_principal();
+        v_menu_principal();
+        v_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_1();
+        v_show_available_items();
+        e_sai_return_to_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_1();
+        v_show_available_items();
+        e_sai_return_to_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_1();
+        v_show_available_items();
+        e_sai_return_to_menu_principal();
+        v_menu_principal();
+        v_menu_principal();
+        v_menu_principal();
+        e_menu_principal_opcao_1();
+        v_show_available_items();
+        e_sai_return_to_menu_principal();
+        v_menu_principal();
+        v_menu_principal();
+        v_menu_principal();
         e_menu_principal_opcao_2();
+        v_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_2();
+        v_espera_produto();
+        e_selected_product_error();
+        v_espera_produto_error();
+        e_epe_return_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_1();
+        v_espera_moeda();
+        e_add_new_value_error();
+        v_espera_moeda_error();
+        e_eme_return_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_2();
+        v_espera_produto();
+        e_selected_product_error();
+        v_espera_produto_error();
+        e_epe_return_menu_compra();
+        v_menu_compra();
+        e_menu_compra_opcao_2();
+        v_espera_produto();
+        e_selected_product_error();
+        v_espera_produto_error();
+        e_epe_return_menu_compra();
         v_menu_compra();
         e_menu_compra_opcao_1();
         v_espera_moeda();
         e_add_new_value_success();
         v_menu_compra();
+        v_menu_compra();
+        v_menu_compra();
         e_menu_compra_opcao_2();
         v_espera_produto();
         e_selected_product_error();
-        v_menu_compra();
-        e_menu_compra_opcao_1();
-        v_espera_moeda();
-        e_add_new_value_error();
-        v_menu_compra();
-        e_menu_compra_opcao_1();
-        v_espera_moeda();
-        e_add_new_value_error();
+        v_espera_produto_error();
+        e_epe_return_menu_compra();
         v_menu_compra();
         e_menu_compra_opcao_2();
         v_espera_produto();
         e_selected_product_success();
         v_libera_produto();
-        e_produto_liberado();
-        v_menu_compra();
-        e_menu_compra_opcao_1();
-        v_espera_moeda();
-        e_add_new_value_success();
-        v_menu_compra();
-        e_menu_compra_opcao_3();
-        v_termina();
     }
 }
 
