@@ -14,7 +14,10 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   private VendingMachine testVM;
   private int salesReportCount = 0;
   private int currentItemStock = 0;
+  private double totalMoneySpent = 0;
+  private double totalMoneyAdded = 0;
   private static final String BUY_ITEM_CODE = "A1";
+  private static final int MONEY_ADDED_TO_MACHINE = 20;
   private String screen;
   private boolean error = false;
 
@@ -193,7 +196,8 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   @Override
   public void e_add_new_value_success() {
     screen = "";
-    testVM.addMoney(20);
+    testVM.addMoney(MONEY_ADDED_TO_MACHINE);
+    totalMoneyAdded += MONEY_ADDED_TO_MACHINE;
   }
 
   @Override
@@ -218,6 +222,7 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   @Override
   public void v_libera_produto() {
     assertEquals(testVM.getInventory().get(BUY_ITEM_CODE).getQuantity(), currentItemStock - 1);
+    assertEquals(testVM.getMachineBalance(), totalMoneyAdded - totalMoneySpent, 0.0001);
   }
 
   @Override
@@ -232,10 +237,12 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void v_termina() {
+    assertEquals(0, totalMoneySpent, 0.0001);
   }
 
   @Override
   public void e_menu_compra_opcao_3() {
+    totalMoneySpent = 0;
   }
 
   @Override
@@ -256,13 +263,17 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void e_entrega_troco() {
+    // TODO? Como verificar isso? Aponta para o menu principal...
     testVM.getChange();
   }
 
   @Override
   public void e_selected_product_success() {
     screen = "";
+
     currentItemStock = testVM.getInventory().get(BUY_ITEM_CODE).getQuantity();
+    totalMoneySpent += testVM.getInventory().get(BUY_ITEM_CODE).getPrice();
+
     testVM.transaction(BUY_ITEM_CODE);
   }
 
