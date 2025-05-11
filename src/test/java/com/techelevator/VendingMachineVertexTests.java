@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class VendingMachineGeneralTest implements VendingMachineGeneral, VendingMachineBuyingMenu {
+public class VendingMachineVertexTest implements VendingMachineGeneral, VendingMachineBuyingMenu {
     private VendingMachine testVM;
     private int salesReportCount = 0;
     private int currentItemStock = 0;
@@ -57,7 +57,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     // Stores the content that would be printed to the console (System.out)
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    
+
     // Save the original System.out (the actual console output), to restore later
     private PrintStream originalOut = System.out;
 
@@ -94,7 +94,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     }
 
     // Redirect System.out to the outContent buffer
-    // This allows you to capture everything that is printed with System.out.println(...)
+    // This allows you to capture everything that is printed with
+    // System.out.println(...)
     public void resetAndRedirectOut() {
         outContent.reset();
         System.setOut(new PrintStream(outContent));
