@@ -159,23 +159,6 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     public void v_show_available_items() {
         assertTrue(allCodes.stream().allMatch(outContent.toString()::contains));
         assertTrue(allName.stream().allMatch(outContent.toString()::contains));
-        // TODO: try check print:
-        // A1 Potato Crisps 5 remaining $3.05
-        // A2 Stackers 5 remaining $1.45
-        // A3 Grain Waves 5 remaining $2.75
-        // A4 Cloud Popcorn 5 remaining $3.65
-        // B1 Moonpie 5 remaining $1.80
-        // B2 Cowtales 5 remaining $1.50
-        // B3 Wonka Bar 5 remaining $1.50
-        // B4 Crunchie 5 remaining $1.75
-        // C1 Cola 5 remaining $1.25
-        // C2 Dr. Salt 5 remaining $1.50
-        // C3 Mountain Melter 5 remaining $1.50
-        // C4 Heavy 5 remaining $1.50
-        // D1 U-Chews 5 remaining $0.85
-        // D2 Little League Chew 5 remaining $0.95
-        // D3 Chiclets 5 remaining $0.75
-        // D4 Triplemint 5 remaining $0.75
     }
 
     @Override
