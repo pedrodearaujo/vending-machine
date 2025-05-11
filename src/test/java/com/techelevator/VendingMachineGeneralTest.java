@@ -1,11 +1,13 @@
 package com.techelevator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +18,64 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     private static final String BUY_ITEM_CODE = "A1";
     private String screen;
     private boolean error = false;
+
+    private final List<String> allCodes = Arrays.asList(
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+    );
+
+    private final List<String> allName = Arrays.asList(
+        "Potato Crisps",
+        "Stackers",
+        "Grain Waves",
+        "Cloud Popcorn",
+        "Moonpie",
+        "Cowtales",
+        "Wonka Bar",
+        "Crunchie",
+        "Cola",
+        "Dr. Salt",
+        "Mountain Melter",
+        "Heavy",
+        "U-Chews",
+        "Little League Chew",
+        "Chiclets",
+        "Triplemint"
+    );
+
+    // A1 Potato Crisps 5 remaining $3.05
+    // A2 Stackers 5 remaining $1.45
+    // A3 Grain Waves 5 remaining $2.75
+    // A4 Cloud Popcorn 5 remaining $3.65
+    // B1 Moonpie 5 remaining $1.80
+    // B2 Cowtales 5 remaining $1.50
+    // B3 Wonka Bar 5 remaining $1.50
+    // B4 Crunchie 5 remaining $1.75
+    // C1 Cola 5 remaining $1.25
+    // C2 Dr. Salt 5 remaining $1.50
+    // C3 Mountain Melter 5 remaining $1.50
+    // C4 Heavy 5 remaining $1.50
+    // D1 U-Chews 5 remaining $0.85
+    // D2 Little League Chew 5 remaining $0.95
+    // D3 Chiclets 5 remaining $0.75
+    // D4 Triplemint 5 remaining $0.75
+
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private PrintStream originalOut = System.out;
 
     private int getCurrentSalesReportCount() {
         File salesReportsDir = new File("sales-reports");
@@ -28,6 +88,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Before
     public void setUp() {
+        resetAndRedirectOut();
+        
         File salesReportsDir = new File("sales-reports");
         if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
             File[] salesReportFiles = salesReportsDir.listFiles();
@@ -38,6 +100,20 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         } catch (IOException e) {
             System.out.println("Error while trying to write the machine log. Please try again.");
         }
+    }
+
+    @After
+    public void tearDown() {
+        restoreOriginalOut();
+    }
+
+    public void resetAndRedirectOut() {
+        outContent.reset();
+        System.setOut(new PrintStream(outContent));
+    }
+
+    public void restoreOriginalOut() {
+        System.setOut(originalOut);
     }
 
     @Override
@@ -81,6 +157,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_show_available_items() {
+        assertTrue(allCodes.stream().allMatch(outContent.toString()::contains));
+        assertTrue(allName.stream().allMatch(outContent.toString()::contains));
         // TODO: try check print:
         // A1 Potato Crisps 5 remaining $3.05
         // A2 Stackers 5 remaining $1.45
@@ -158,7 +236,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_menu_principal_opcao_1() {
-        // TODO: save output
+        resetAndRedirectOut();
         testVM.listInventory();
     }
 
