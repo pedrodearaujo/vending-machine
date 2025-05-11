@@ -20,42 +20,40 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     private boolean error = false;
 
     private final List<String> allCodes = Arrays.asList(
-        "A1",
-        "A2",
-        "A3",
-        "A4",
-        "B1",
-        "B2",
-        "B3",
-        "B4",
-        "C1",
-        "C2",
-        "C3",
-        "C4",
-        "D1",
-        "D2",
-        "D3",
-        "D4"
-    );
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "B1",
+            "B2",
+            "B3",
+            "B4",
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "D1",
+            "D2",
+            "D3",
+            "D4");
 
     private final List<String> allName = Arrays.asList(
-        "Potato Crisps",
-        "Stackers",
-        "Grain Waves",
-        "Cloud Popcorn",
-        "Moonpie",
-        "Cowtales",
-        "Wonka Bar",
-        "Crunchie",
-        "Cola",
-        "Dr. Salt",
-        "Mountain Melter",
-        "Heavy",
-        "U-Chews",
-        "Little League Chew",
-        "Chiclets",
-        "Triplemint"
-    );
+            "Potato Crisps",
+            "Stackers",
+            "Grain Waves",
+            "Cloud Popcorn",
+            "Moonpie",
+            "Cowtales",
+            "Wonka Bar",
+            "Crunchie",
+            "Cola",
+            "Dr. Salt",
+            "Mountain Melter",
+            "Heavy",
+            "U-Chews",
+            "Little League Chew",
+            "Chiclets",
+            "Triplemint");
 
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private PrintStream originalOut = System.out;
@@ -72,7 +70,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
     @Before
     public void setUp() {
         resetAndRedirectOut();
-        
+
         File salesReportsDir = new File("sales-reports");
         if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
             File[] salesReportFiles = salesReportsDir.listFiles();
@@ -302,7 +300,6 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_2();
         v_menu_compra();
-        v_menu_compra();
         e_menu_compra_opcao_1();
         v_espera_moeda();
         e_add_new_value_success();
@@ -312,8 +309,6 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         e_selected_product_error();
         v_espera_produto_error();
         e_epe_return_menu_compra();
-        v_menu_compra();
-        v_menu_compra();
         v_menu_compra();
         e_menu_compra_opcao_3();
         v_termina();
@@ -325,19 +320,15 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_2();
         v_menu_compra();
-        v_menu_compra();
         e_menu_compra_opcao_2();
         v_espera_produto();
         e_selected_product_error();
         v_espera_produto_error();
         e_epe_return_menu_compra();
         v_menu_compra();
-        v_menu_compra();
-        v_menu_compra();
         e_menu_compra_opcao_3();
         v_termina();
         e_entrega_troco();
-        v_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_3();
         v_exit();
