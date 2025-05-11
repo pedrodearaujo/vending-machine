@@ -55,7 +55,10 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
             "Chiclets",
             "Triplemint");
 
+    // Stores the content that would be printed to the console (System.out)
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    
+    // Save the original System.out (the actual console output), to restore later
     private PrintStream originalOut = System.out;
 
     private int getCurrentSalesReportCount() {
@@ -69,6 +72,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Before
     public void setUp() {
+        // Before each test, redirect System.out to capture test output
         resetAndRedirectOut();
 
         File salesReportsDir = new File("sales-reports");
@@ -85,14 +89,18 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @After
     public void tearDown() {
+        // After each test, restore standard output to the console
         restoreOriginalOut();
     }
 
+    // Redirect System.out to the outContent buffer
+    // This allows you to capture everything that is printed with System.out.println(...)
     public void resetAndRedirectOut() {
         outContent.reset();
         System.setOut(new PrintStream(outContent));
     }
 
+    // Restore standard output to the console (original System.out)
     public void restoreOriginalOut() {
         System.setOut(originalOut);
     }
