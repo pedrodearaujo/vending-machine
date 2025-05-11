@@ -44,6 +44,15 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_generate_sales_report() {
+        // Ensure that the reports are generated with different names and no overwriting
+        // the existing
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Thread was interrupted, failed to complete sleep.");
+        }
+
         int currentCount = -1;
         File salesReportsDir = new File("sales-reports");
         if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
@@ -191,9 +200,10 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_epe_return_menu_compra() {
-        if (error)
+        if (error) {
             error = false;
-        // TODO: Teria que limpar a screen?
+            screen = "";
+        }
     }
 
     @Override
@@ -205,9 +215,10 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_eme_return_menu_compra() {
-        if (error)
+        if (error) {
             error = false;
-        // TODO: Teria que limpar a screen?
+            screen = "";
+        }
     }
 
     @Test
@@ -236,12 +247,6 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Thread was interrupted, failed to complete sleep.");
-        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_2();
@@ -274,22 +279,8 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_generate_sales_report();
         e_gsr_return_to_menu_principal();
         v_menu_principal();
-        // Ensure that the reports are generated with different names and no overwriting
-        // occurs
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Thread was interrupted, failed to complete sleep.");
-        }
         e_menu_principal_opcao_4();
         v_generate_sales_report();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Thread was interrupted, failed to complete sleep.");
-        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_3();
@@ -304,12 +295,6 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Thread was interrupted, failed to complete sleep.");
-        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_1();
@@ -328,12 +313,6 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
         v_menu_principal();
         e_menu_principal_opcao_4();
         v_generate_sales_report();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Thread was interrupted, failed to complete sleep.");
-        }
         e_gsr_return_to_menu_principal();
         v_menu_principal();
         e_menu_principal_opcao_1();
