@@ -81,3 +81,11 @@ If I were to spend more time improving this project, I would:
 - Implement BigDecimal instead of doubles throughout.
 - Change the Item Class to an Interface that is then implemented by Chip, Candy, Drink, Gum, etc.
 - Store vending machine data in a databse, instead of in .txt files.
+
+
+## How to run the tests created in the exercise
+
+Just run the following command:
+
+```
+mvn -Dtest=VendingMachineGeneralTest test
