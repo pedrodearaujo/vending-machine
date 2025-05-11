@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class VendingMachineVertexTest implements VendingMachineGeneral, VendingMachineBuyingMenu {
+public class VendingMachineVertexTests implements VendingMachineGeneral, VendingMachineBuyingMenu {
     private VendingMachine testVM;
     private int salesReportCount = 0;
     private int currentItemStock = 0;
