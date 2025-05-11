@@ -1,21 +1,30 @@
 package com.techelevator;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.junit.Before;
+import org.junit.Test;
+
 public class VendingMachineGeneralTest implements VendingMachineGeneral, VendingMachineBuyingMenu {
     private VendingMachine testVM;
     private int salesReportCount = 0;
     private int currentItemStock = 0;
-    private static final String ITEM_CODE = "A1";
+    private static final String BUY_ITEM_CODE = "A1";
     private String screen;
     private boolean error = false;
+
+    private int getCurrentSalesReportCount() {
+        File salesReportsDir = new File("sales-reports");
+        if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
+            File[] salesReportFiles = salesReportsDir.listFiles();
+            return salesReportFiles != null ? salesReportFiles.length : 0;
+        }
+        return -1;
+    }
 
     @Before
     public void setUp() {
@@ -40,6 +49,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_exit() {
+        assertEquals("Thanks for using the VENDO-MATIC 800. Have a wonderful day!", screen);
     }
 
     @Override
@@ -53,22 +63,15 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
             System.out.println("Thread was interrupted, failed to complete sleep.");
         }
 
-        int currentCount = -1;
-        File salesReportsDir = new File("sales-reports");
-        if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
-            File[] salesReportFiles = salesReportsDir.listFiles();
-            currentCount = salesReportFiles != null ? salesReportFiles.length : 0;
-        }
-        assertEquals(currentCount, salesReportCount + 1);
+        int currentSalesReportCount = getCurrentSalesReportCount();
+        assertEquals(currentSalesReportCount, salesReportCount + 1);
     }
 
     @Override
     public void e_restart_machine() {
-        File salesReportsDir = new File("sales-reports");
-        if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
-            File[] salesReportFiles = salesReportsDir.listFiles();
-            salesReportCount = salesReportFiles != null ? salesReportFiles.length : 0;
-        }
+        salesReportCount = getCurrentSalesReportCount();
+        screen = "";
+        // TODO: Try remove the try exception
         try {
             testVM = new VendingMachine();
         } catch (IOException e) {
@@ -78,6 +81,23 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_show_available_items() {
+        // TODO: try check print:
+        // A1 Potato Crisps 5 remaining $3.05
+        // A2 Stackers 5 remaining $1.45
+        // A3 Grain Waves 5 remaining $2.75
+        // A4 Cloud Popcorn 5 remaining $3.65
+        // B1 Moonpie 5 remaining $1.80
+        // B2 Cowtales 5 remaining $1.50
+        // B3 Wonka Bar 5 remaining $1.50
+        // B4 Crunchie 5 remaining $1.75
+        // C1 Cola 5 remaining $1.25
+        // C2 Dr. Salt 5 remaining $1.50
+        // C3 Mountain Melter 5 remaining $1.50
+        // C4 Heavy 5 remaining $1.50
+        // D1 U-Chews 5 remaining $0.85
+        // D2 Little League Chew 5 remaining $0.95
+        // D3 Chiclets 5 remaining $0.75
+        // D4 Triplemint 5 remaining $0.75
     }
 
     @Override
@@ -87,6 +107,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_sai_return_to_menu_principal() {
+        // TODO: clean output/screen
     }
 
     @Override
@@ -106,10 +127,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_menu_principal_opcao_3() {
+        screen = "Thanks for using the VENDO-MATIC 800. Have a wonderful day!";
     }
 
     @Override
     public void e_selected_product_error() {
+        screen = "";
         try {
             testVM.transaction("Z1");
         } catch (Exception e) {
@@ -120,6 +143,7 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_add_new_value_success() {
+        screen = "";
         testVM.addMoney(20);
     }
 
@@ -129,10 +153,13 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_menu_principal_opcao_2() {
+
     }
 
     @Override
     public void e_menu_principal_opcao_1() {
+        // TODO: save output
+        testVM.listInventory();
     }
 
     @Override
@@ -141,16 +168,17 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void v_libera_produto() {
-        assertEquals(testVM.getInventory().get(ITEM_CODE).getQuantity(), currentItemStock - 1);
+        assertEquals(testVM.getInventory().get(BUY_ITEM_CODE).getQuantity(), currentItemStock - 1);
     }
 
     @Override
     public void v_espera_produto() {
-        // Assert screen
+        assertEquals("Please enter the code for the item you'd like to purchase: ", screen);
     }
 
     @Override
     public void e_menu_compra_opcao_1() {
+        screen = "How much money would you like to add? ($1, $2, $5, $10, or $20)";
     }
 
     @Override
@@ -167,10 +195,12 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_menu_compra_opcao_2() {
+        screen = "Please enter the code for the item you'd like to purchase: ";
     }
 
     @Override
     public void e_add_new_value_error() {
+        screen = "";
         error = true;
         screen = "INVALID INPUT. Please enter 1, 2, 5, 10, or 20.";
     }
@@ -182,13 +212,14 @@ public class VendingMachineGeneralTest implements VendingMachineGeneral, Vending
 
     @Override
     public void e_selected_product_success() {
-        currentItemStock = testVM.getInventory().get(ITEM_CODE).getQuantity();
-        testVM.transaction(ITEM_CODE);
+        screen = "";
+        currentItemStock = testVM.getInventory().get(BUY_ITEM_CODE).getQuantity();
+        testVM.transaction(BUY_ITEM_CODE);
     }
 
     @Override
     public void v_espera_moeda() {
-        // Assert IO?
+        assertEquals("How much money would you like to add? ($1, $2, $5, $10, or $20)", screen);
     }
 
     @Override
