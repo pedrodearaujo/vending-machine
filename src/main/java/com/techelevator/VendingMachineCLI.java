@@ -43,6 +43,10 @@ public class VendingMachineCLI {
                     e.printStackTrace();
                 }
             }
+            
+            if (userInputMainMenu == 5) {
+                userInterface.increaseProduct();
+            }
         }
         System.out.println("Thanks for using the VENDO-MATIC 800. Have a wonderful day!");
     }

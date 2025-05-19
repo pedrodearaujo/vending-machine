@@ -24,6 +24,8 @@ public class UI {
             System.out.println("(1) Display vending machine items");
             System.out.println("(2) Purchase");
             System.out.println("(3) Exit");
+            System.out.println("(4) Generate report");
+            System.out.println("(5) Increase Amount of Product");
             System.out.println();
             System.out.print("Type a number, then hit Enter: ");
             String userInput = input.nextLine();
@@ -31,18 +33,58 @@ public class UI {
                 inputNumMainMenu = Integer.parseInt(userInput);
             } catch (Exception e) {
                 System.out.println();
-                System.out.println("INVALID INPUT. Please enter a number: 1, 2, or 3.");
+                System.out.println("INVALID INPUT. Please enter a number: 1, 2, 3, 4 or 5.");
                 System.out.println();
             }
-            if (inputNumMainMenu > 0 && inputNumMainMenu < 5) {
+            if (inputNumMainMenu > 0 && inputNumMainMenu <= 5) {
                 break;
             }
             System.out.println();
-            System.out.println("INVALID INPUT. Please enter a number: 1, 2, or 3.");
+            System.out.println("INVALID INPUT. Please enter a number: 1, 2, 3, 4 or 5.");
             System.out.println();
         }
 
         return inputNumMainMenu;
+    }
+    
+    public void increaseProduct() {
+        uiVendingMachine.listInventory();
+
+        System.out.println();
+        System.out.print("Please enter the code for the item you'd like to increase: ");
+        String desiredItem = input.nextLine();
+        
+        if (!uiVendingMachine.getInventory().containsKey(desiredItem)) {
+            System.out.println();
+            System.out.println("INVALID INPUT. Please try again and enter a valid item code.");
+        } else {
+            System.out.println();
+            System.out.print("How many would you like to add? ");
+            String quantityToAddStr = input.nextLine();
+            try {
+                int quantityToAdd = Integer.parseInt(quantityToAddStr);
+                if (quantityToAdd > 0) {
+                    Item currentItem = uiVendingMachine.getInventory().get(desiredItem);
+                    int finalQuantity = currentItem.getQuantity() + quantityToAdd;
+                    
+                    if (finalQuantity <= Item.MAX_QUANTITY) {
+                        currentItem.setQuantity(finalQuantity);
+
+                        System.out.println();
+                        System.out.println("Added " + quantityToAdd + " to the inventory.");
+                    } else {
+                        System.out.println();
+                        System.out.printf("COULD NOT ADD, VALUE EXCEEDS MAXIMUM QUANTITY. %d\n", Item.MAX_QUANTITY);
+                    }
+                } else {
+                    System.out.println();
+                    System.out.println("INVALID INPUT. Please enter a positive number.");
+                }
+            } catch (Exception e) {
+                System.out.println();
+                System.out.println("INVALID INPUT. Please enter a positive integer.");
+            }
+        }
     }
 
     public void purchaseMenu() {

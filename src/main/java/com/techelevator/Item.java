@@ -7,6 +7,8 @@ public class Item {
     private final double price;
     private int quantity;
 
+    public static final int MAX_QUANTITY = 10;
+
     public Item(String code, String name, double price, String type) {
         this.code = code;
         this.type = type;
