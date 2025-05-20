@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.junit.After;
@@ -31,10 +30,6 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   private PipedInputStream pipedIn;
   private PipedOutputStream pipedOut;
-
-  Logger logger = Logger.getLogger("BaseGaphwalkerTests");
-
-  private final InputStream originalIn = System.in;
 
   private static final Random RANDOM = new Random();
   
@@ -426,7 +421,6 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void v_increase_product_error() {
-    logger.info(outContent.toString());
     assertTrue(outContent.toString().contains("INVALID INPUT. Please try again and enter a valid item code."));
     assertFalse(testVM.getInventory().containsKey(currentCode));
   }
@@ -434,7 +428,6 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   @Override
   public void v_espera_quantidade() {
     assertTrue(testVM.getInventory().containsKey(currentCode));
-    logger.info(outContent.toString());
     assertTrue(outContent.toString().contains("How many would you like to add? "));
   }
 
