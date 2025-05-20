@@ -311,4 +311,39 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
       screen = "";
     }
   }
+
+  @Override
+  public void e_menu_principal_opcao_5() {
+
+  }
+
+  @Override
+  public void e_ip_selected_product_error() {
+
+  }
+
+  @Override
+  public void e_ip_selected_product_success() {
+
+  }
+
+  @Override
+  public void e_add_new_stock_success() {
+
+  }
+
+  @Override
+  public void e_add_new_stock_error() {
+
+  }
+
+  @Override
+  public void v_increase_product() {
+
+  }
+
+  @Override
+  public void v_increasing_product() {
+
+  }
 }
