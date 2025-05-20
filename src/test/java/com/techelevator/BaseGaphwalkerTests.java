@@ -1,14 +1,16 @@
 package com.techelevator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
+
+import static org.junit.Assert.*;
 
 public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachineBuyingMenu {
   private VendingMachine testVM;
@@ -20,6 +22,28 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   private static final int MONEY_ADDED_TO_MACHINE = 20;
   private String screen;
   private boolean error = false;
+  private UI userInterfaceTest;
+  private String currentCode;
+  private int quantityBeforeAdd;
+  private int ADDED_STOCK = 1;
+  private int INVALID_ADDED_STOCK = -1;
+  private Thread option5Thread;
+
+  private PipedInputStream pipedIn;
+  private PipedOutputStream pipedOut;
+
+  Logger logger = Logger.getLogger("BaseGaphwalkerTests");
+
+  private final InputStream originalIn = System.in;
+
+  private static final Random RANDOM = new Random();
+  
+  private final List<String> invalidCodes = Arrays.asList(
+      "F1",
+      "F2",
+      "Z1",
+      "Z4"
+  );
 
   private final List<String> allCodes = Arrays.asList(
       "A1",
@@ -37,7 +61,8 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
       "D1",
       "D2",
       "D3",
-      "D4");
+      "D4"
+  );
 
   private final List<String> allName = Arrays.asList(
       "Potato Crisps",
@@ -74,6 +99,14 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Before
   public void setUp() {
+    try {
+      pipedIn = new PipedInputStream();
+      pipedOut = new PipedOutputStream(pipedIn);
+      System.setIn(pipedIn);
+    } catch (IOException e) {
+      throw new RuntimeException("Erro ao inicializar o pipe de entrada/saída", e);
+    }
+    
     // Before each test, redirect System.out to capture test output
     resetAndRedirectOut();
 
@@ -84,6 +117,7 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
     }
     try {
       testVM = new VendingMachine();
+      userInterfaceTest = new UI(testVM);
     } catch (IOException e) {
       System.out.println("Error while trying to write the machine log. Please try again.");
     }
@@ -159,12 +193,17 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void e_sai_return_to_menu_principal() {
-    resetAndRedirectOut();
   }
 
   @Override
   public void v_menu_principal() {
     assertEquals(0, testVM.getMachineBalance(), 0.0001);
+
+    List<Integer> allItemsQuantity = testVM.getInventory().values().stream()
+      .map(Item::getQuantity)
+      .collect(Collectors.toList());
+    
+    assertTrue(allItemsQuantity.stream().allMatch(element -> element <= Item.MAX_QUANTITY));
   }
 
   @Override
@@ -211,7 +250,6 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void e_menu_principal_opcao_1() {
-    resetAndRedirectOut();
     testVM.listInventory();
   }
 
@@ -314,12 +352,26 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void e_menu_principal_opcao_5() {
+    option5Thread = new Thread(userInterfaceTest::increaseProduct);
 
+    option5Thread.start();
+    try {
+      Thread.sleep(500);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
   }
 
   @Override
   public void e_ip_selected_product_error() {
-
+    currentCode = invalidCodes.get(RANDOM.nextInt(invalidCodes.size()));
+    try {
+      pipedOut.write((currentCode + "\n").getBytes());
+      pipedOut.flush();
+      option5Thread.join();
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
@@ -329,17 +381,37 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void e_ip_selected_product_success() {
-
+    currentCode = allCodes.get(RANDOM.nextInt(allCodes.size()));
+    try {
+      pipedOut.write((currentCode + "\n").getBytes());
+      pipedOut.flush();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
   public void e_add_new_stock_success() {
-
+    try {
+      pipedOut.write((ADDED_STOCK + "\n").getBytes());
+      pipedOut.flush();
+      option5Thread.join();
+    } catch (IOException | InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
   public void e_add_new_stock_error() {
-
+    try {
+      pipedOut.write((INVALID_ADDED_STOCK + "\n").getBytes());
+      pipedOut.flush();
+      option5Thread.join();
+    } catch (IOException | InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
@@ -349,21 +421,25 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void v_increase_product() {
-
+    assertTrue(outContent.toString().contains("Please enter the code for the item you'd like to increase: "));
   }
 
   @Override
   public void v_increase_product_error() {
-
+    logger.info(outContent.toString());
+    assertTrue(outContent.toString().contains("INVALID INPUT. Please try again and enter a valid item code."));
+    assertFalse(testVM.getInventory().containsKey(currentCode));
   }
 
   @Override
   public void v_espera_quantidade() {
-
+    assertTrue(testVM.getInventory().containsKey(currentCode));
+    logger.info(outContent.toString());
+    assertTrue(outContent.toString().contains("How many would you like to add? "));
   }
 
   @Override
   public void v_espera_quantidade_error() {
-
+    assertTrue(outContent.toString().contains("INVALID INPUT. Please enter a positive number."));
   }
 }
