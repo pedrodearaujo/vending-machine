@@ -92,8 +92,16 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
     return -1;
   }
 
+  private void startOutputCapture() {
+    outContent = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(outContent));
+  }
+
   @Before
   public void setUp() {
+    originalOut = System.out;
+    startOutputCapture();
+    
     try {
       pipedIn = new PipedInputStream();
       pipedOut = new PipedOutputStream(pipedIn);
@@ -102,8 +110,8 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
       throw new RuntimeException("Erro ao inicializar o pipe de entrada/saída", e);
     }
     
-    // Before each test, redirect System.out to capture test output
-    resetAndRedirectOut();
+//    // Before each test, redirect System.out to capture test output
+//    resetAndRedirectOut();
 
     File salesReportsDir = new File("sales-reports");
     if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
@@ -380,7 +388,9 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
     try {
       pipedOut.write((currentCode + "\n").getBytes());
       pipedOut.flush();
-    } catch (IOException e) {
+
+      Thread.sleep(500);
+    } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
