@@ -323,6 +323,11 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   }
 
   @Override
+  public void e_ipe_return_to_menu_principal() {
+
+  }
+
+  @Override
   public void e_ip_selected_product_success() {
 
   }
@@ -338,12 +343,27 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   }
 
   @Override
+  public void e_eqe_return_to_menu_principal() {
+
+  }
+
+  @Override
   public void v_increase_product() {
 
   }
 
   @Override
-  public void v_increasing_product() {
+  public void v_increase_product_error() {
+
+  }
+
+  @Override
+  public void v_espera_quantidade() {
+
+  }
+
+  @Override
+  public void v_espera_quantidade_error() {
 
   }
 }
