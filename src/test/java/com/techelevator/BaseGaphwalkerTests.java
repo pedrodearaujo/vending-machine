@@ -32,13 +32,12 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   private PipedOutputStream pipedOut;
 
   private static final Random RANDOM = new Random();
-  
+
   private final List<String> invalidCodes = Arrays.asList(
       "F1",
       "F2",
       "Z1",
-      "Z4"
-  );
+      "Z4");
 
   private final List<String> allCodes = Arrays.asList(
       "A1",
@@ -56,8 +55,7 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
       "D1",
       "D2",
       "D3",
-      "D4"
-  );
+      "D4");
 
   private final List<String> allName = Arrays.asList(
       "Potato Crisps",
@@ -101,7 +99,7 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   public void setUp() {
     originalOut = System.out;
     startOutputCapture();
-    
+
     try {
       pipedIn = new PipedInputStream();
       pipedOut = new PipedOutputStream(pipedIn);
@@ -109,9 +107,9 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
     } catch (IOException e) {
       throw new RuntimeException("Erro ao inicializar o pipe de entrada/saída", e);
     }
-    
-//    // Before each test, redirect System.out to capture test output
-//    resetAndRedirectOut();
+
+    // // Before each test, redirect System.out to capture test output
+    // resetAndRedirectOut();
 
     File salesReportsDir = new File("sales-reports");
     if (salesReportsDir.exists() && salesReportsDir.isDirectory()) {
@@ -203,9 +201,9 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
     assertEquals(0, testVM.getMachineBalance(), 0.0001);
 
     List<Integer> allItemsQuantity = testVM.getInventory().values().stream()
-      .map(Item::getQuantity)
-      .collect(Collectors.toList());
-    
+        .map(Item::getQuantity)
+        .collect(Collectors.toList());
+
     assertTrue(allItemsQuantity.stream().allMatch(element -> element <= Item.MAX_QUANTITY));
   }
 
@@ -425,6 +423,11 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   }
 
   @Override
+  public void e_eqs_return_to_menu_principal() {
+
+  }
+
+  @Override
   public void v_increase_product() {
     assertTrue(outContent.toString().contains("Please enter the code for the item you'd like to increase: "));
   }
@@ -445,4 +448,10 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   public void v_espera_quantidade_error() {
     assertTrue(outContent.toString().contains("INVALID INPUT. Please enter a positive number."));
   }
+
+  @Override
+  public void v_espera_quantidade_success() {
+    assertTrue(outContent.toString().contains("INVALID INPUT. Please enter a positive number."));
+  }
+
 }
