@@ -27,6 +27,7 @@ bin/
 obj/
 packages/
 .vs/
+sales-reports/
 
 .DS_Store
 node_modules
