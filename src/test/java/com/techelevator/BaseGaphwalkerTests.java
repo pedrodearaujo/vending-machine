@@ -275,6 +275,7 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   @Override
   public void e_menu_compra_opcao_3() {
     totalMoneySpent = 0;
+    totalMoneyAdded = 0;
   }
 
   @Override
