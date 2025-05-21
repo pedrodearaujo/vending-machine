@@ -23,7 +23,6 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   private boolean error = false;
   private UI userInterfaceTest;
   private String currentCode;
-  private int quantityBeforeAdd;
   private int ADDED_STOCK = 1;
   private int INVALID_ADDED_STOCK = -1;
   private Thread option5Thread;
@@ -199,12 +198,6 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   @Override
   public void v_menu_principal() {
     assertEquals(0, testVM.getMachineBalance(), 0.0001);
-
-    List<Integer> allItemsQuantity = testVM.getInventory().values().stream()
-        .map(Item::getQuantity)
-        .collect(Collectors.toList());
-
-    assertTrue(allItemsQuantity.stream().allMatch(element -> element <= Item.MAX_QUANTITY));
   }
 
   @Override
@@ -451,7 +444,11 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void v_espera_quantidade_success() {
-    assertTrue(outContent.toString().contains("INVALID INPUT. Please enter a positive number."));
+    List<Integer> allItemsQuantity = testVM.getInventory().values().stream()
+        .map(Item::getQuantity)
+        .collect(Collectors.toList());
+
+    assertTrue(allItemsQuantity.stream().allMatch(element -> element <= Item.MAX_QUANTITY));
   }
 
 }
