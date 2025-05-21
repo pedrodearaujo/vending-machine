@@ -24,7 +24,7 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
   private UI userInterfaceTest;
   private String currentCode;
   private int ADDED_STOCK = 1;
-  private int INVALID_ADDED_STOCK = -1;
+  private int INVALID_ADDED_STOCK = 11;
   private Thread option5Thread;
 
   private PipedInputStream pipedIn;
@@ -440,7 +440,8 @@ public class BaseGaphwalkerTests implements VendingMachineGeneral, VendingMachin
 
   @Override
   public void v_espera_quantidade_error() {
-    assertTrue(outContent.toString().contains("INVALID INPUT. Please enter a positive number."));
+    String expectedMessage = String.format("COULD NOT ADD, VALUE EXCEEDS MAXIMUM QUANTITY. %d", Item.MAX_QUANTITY);
+    assertTrue(outContent.toString().contains(expectedMessage));
   }
 
   @Override
